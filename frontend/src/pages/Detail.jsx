@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { fetchTour } from '../redux/actions/tours'
 import { img_url } from '../redux/api'
+import { CircularProgress } from '@mui/material'
 const Detail =()=> {
     const {id}=useParams()
     const dispatch=useDispatch()
@@ -15,7 +16,8 @@ const Detail =()=> {
     },[id,dispatch])
     return(
         <>
-        <div style={{display:'flex',
+     {isLoading ? <CircularProgress/>:
+     <div style={{display:'flex',
            flexDirection:'column',
            position:'relative',borderRadius:'7px',
            padding:'0 40px 20px 40px',}}>
@@ -43,7 +45,7 @@ const Detail =()=> {
         </div>
         <RelatedTours/>
        <Comment/>
-        </div>
+        </div>}
         </>
     )
 }

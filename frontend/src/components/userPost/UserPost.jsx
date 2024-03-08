@@ -1,10 +1,15 @@
 import { Delete, Edit} from '@mui/icons-material'
 import {Link} from 'react-router-dom'
+import {img_url} from '../../redux/api'
 const UserPost=({dashboard})=>{
+    const user=JSON.parse(localStorage.getItem('profile'))
+
     return(
         <>
+        {user?.result?._id === dashboard?.creator
+         &&
         <div style={{display:'flex',position:'relative',borderRadius:'7px'}}>
-            <img src={dashboard.image} alt='image' style={{width:'300px',height:'200px',borderTopLeftRadius:'7px',borderTopRightRadius:'7px'}}/>
+            <img src={`${img_url}${dashboard.image}`} alt='image' style={{width:'300px',height:'200px',borderTopLeftRadius:'7px',borderTopRightRadius:'7px'}}/>
             <div style={{padding:'20px 0px 0px 20px',}}>
             <div style={{fontWeight:'bolder',fontSize:'25px',paddingBottom:'10px'}}>{dashboard.title}</div>
             <div style={{position:'absolute',top:'20px',left:'20px',color:'#fff',fontWeight:'bolder',fontSize:'25px'}}>{dashboard.creator}</div>
@@ -23,6 +28,7 @@ const UserPost=({dashboard})=>{
             </div>
             </div>
         </div>
+}
         </>
     )
 }

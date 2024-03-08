@@ -1,9 +1,21 @@
 import { Search } from "@mui/icons-material";
-import { AppBar, Box, Toolbar, Typography } from "@mui/material";
-import React from "react";
-import { Link } from "react-router-dom";
+import { AppBar, Box,Button, Toolbar, Typography } from "@mui/material";
+import {useEffect,useState} from "react";
+import {useDispatch} from "react-redux";
+import { Link,useNavigate, useLocation} from "react-router-dom";
 
 const Navbar = () => {
+  const [user,setUser]=useState(JSON.parse(localStorage.getItem('profile')))
+  const dispatch=useDispatch()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const logoutUser = () =>{
+    dispatch({type:"LOGOUT",navigate})
+    navigate('/auth')
+  }
+  useEffect(()=>{
+    setUser(JSON.parse(localStorage.getItem('profile')))
+  },[location])
   return (
     <>
       <AppBar sx={{ background: "#eee" }}>
@@ -17,7 +29,7 @@ const Navbar = () => {
             </Link>
           </Typography>
           <Typography variant="h6" sx={{color: "rgba(44,200,255,1)",fontWeight:'bolder' }}>
-            Yabsira Yetwale
+            {user?.result?.firstname} {user?.result?.lastname}
           </Typography>
           <Box
             sx={{
@@ -62,8 +74,8 @@ const Navbar = () => {
                 </Link>
               </Typography>
             </Box>
-            {/* {
-              <Typography
+            {user?.result ?
+              <Button
                 sx={{
                   display: "flex",
                   justifyContent: "center",
@@ -75,10 +87,11 @@ const Navbar = () => {
                   cursor: "pointer",
                   "&:hover": { opacity: "0.5" },
                 }}
+                onClick={logoutUser}
               >
                 Logout
-              </Typography>
-            } */}
+              </Button>
+              :
             <Typography sx={{ "&:hover": { opacity: "0.5" } }}>
               <Link
                 to="/auth"
@@ -96,7 +109,7 @@ const Navbar = () => {
                 {" "}
                 Login
               </Link>
-            </Typography>
+            </Typography>}
             <form
               style={{
                 display: "flex",

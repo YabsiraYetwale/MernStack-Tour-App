@@ -13,7 +13,7 @@ export const signIn=(user)=>API.post('/users/signin',user)
 
 export const img_url= 'http://localhost:5000/images/'
 
-export const createTour=(tour)=>API.post('/tours/signup',tour)
+export const createTour=(tour)=>API.post('/tours',tour)
 export const fetchTours=()=>API.get('/tours')
 export const fetchTour=(id)=>API.get(`/tours/${id}`)
 export const updateTour=(id,tour)=>API.patch(`/tours/${id}`,tour)

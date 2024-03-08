@@ -1,6 +1,7 @@
-import {tours} from '../utils'
+import {useSelector} from 'react-redux'
 import UserPost from './UserPost'
 const UserPosts=()=> {
+    const {tours}=useSelector(state=>state.tours)
     return(
         <>
          <div style={{display:'flex',flexDirection:'column',
@@ -8,7 +9,7 @@ const UserPosts=()=> {
          alignItems:'center',flexWrap:'wrap',gap:'2rem',
          width:'100%',
          }}>
-            {tours.map((dashboard,i)=>(
+            {tours?.map((dashboard,i)=>(
                 <div key={i}>
                     <UserPost dashboard={dashboard}/>
                 </div>

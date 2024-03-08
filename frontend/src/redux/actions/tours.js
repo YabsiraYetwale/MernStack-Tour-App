@@ -1,11 +1,11 @@
 import * as api from '../api'
 
-export const createTour=(tour)=>async(dispatch)=>{
+export const createTour=(tour,navigate)=>async(dispatch)=>{
     try {
         dispatch({type:"START_LOADING"})
         const {data}= await api.createTour(tour)
-        console.log(data)
         dispatch({type:"CREATE",payload:data})
+        navigate('/')
         dispatch({type:"END_LOADING"})
     } catch (error) {
         console.log(error)
@@ -37,6 +37,7 @@ export const updateTour=(id,tour)=>async(dispatch)=>{
         dispatch({type:"START_LOADING"})
         const {data}= await api.updateTour(id,tour)
         dispatch({type:"UPDATE",payload:data})
+        navigate('/dashboard')
         dispatch({type:"END_LOADING"})
     } catch (error) {
         console.log(error)

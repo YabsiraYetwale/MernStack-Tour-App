@@ -6,10 +6,10 @@ const Tour=({tour})=>{
         <div style={{display:'flex',flexDirection:'column',position:'relative',width:'20rem',borderRadius:'7px'}}>
             <img src={`${img_url}${tour.image}`} alt='image' style={{width:'100%',height:'250px',borderTopLeftRadius:'7px',borderTopRightRadius:'7px'}}/>
             <div style={{padding:'20px 0px 40px 20px',}}>
-            <div style={{position:'absolute',top:'20px',left:'20px',color:'#fff',fontWeight:'bolder',fontSize:'25px'}}>{tour.creator}</div>
+            <div style={{position:'absolute',top:'20px',left:'20px',color:'#fff',fontWeight:'bolder',fontSize:'25px'}}>{tour?.creatorname}</div>
                <div style={{display:'flex',justifyContent:'space-between',color:'#345656'}}>
                 <div style={{display:'flex',gap:'8px'}}>
-                    {tour.tags.map((tag,i)=>(
+                    {tour?.tags?.map((tag,i)=>(
                     <div key={i}>
                         #{tag}
                     </div>
