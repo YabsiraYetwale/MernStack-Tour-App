@@ -11,6 +11,8 @@ API.interceptors.request.use((req)=>{
 export const signUp=(user)=>API.post('/users/signup',user)
 export const signIn=(user)=>API.post('/users/signin',user)
 
+export const img_url= 'http://localhost:5000/images/'
+
 export const createTour=(tour)=>API.post('/tours/signup',tour)
 export const fetchTours=()=>API.get('/tours')
 export const fetchTour=(id)=>API.get(`/tours/${id}`)

@@ -1,3 +1,4 @@
 import {combineReducers} from 'redux'
-
-export default combineReducers({})
+import { auths } from './auths'
+import { tours } from './tours'
+export default combineReducers({auths,tours})

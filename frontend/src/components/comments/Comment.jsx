@@ -1,4 +1,4 @@
-import m77 from '../../assets/m77.png'
+
 import {AccountBox,Warning,MailOutline} from '@mui/icons-material';
 const Comment = () => {
   return (
@@ -52,7 +52,7 @@ const Comment = () => {
                 <div>Subscribe</div>
             </div>
             <div style={{display:'flex',gap:'0.5rem',}} >
-                <img src={m77} alt='img' style={{width:'20px',height:'20px'}}/>
+                 <MailOutline/>
                 <div style={{width:'150px'}}>Add Disqus to your site</div>
             </div>
             <div style={{display:'flex',gap:'0.5rem',}} >
