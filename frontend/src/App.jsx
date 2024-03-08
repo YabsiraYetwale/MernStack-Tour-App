@@ -1,36 +1,29 @@
 import React from 'react'
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import Navbar from './components/navbar/Navbar'
-import Auth from './pages/Auth'
-import Cart from './pages/Cart'
 import Home from './pages/Home'
-import ListProduct from './pages/ListProduct'
-import {MenShopCategory,WomenShopCategory,KidsShopCategory} from './pages/ShopCategory'
-import Footer from './components/footer/Footer'
+import Auth from './pages/Auth'
 import Detail from './pages/Detail'
-import FormCreate from './pages/FormCreate'
-import {FormEdit,FormHome } from './pages/FormEdit'
+import Dashboard from './pages/Dashbord'
+import PageNotFound from './pages/PageNotFound'
+import Navbar from './components/navbar/Navbar'
 import { Box } from '@mui/material'
+import Form from './pages/Form'
 const App = () => {
   return (
-    <Box style={{overflow:'hidden'}}>
-      <BrowserRouter>
+    <BrowserRouter>
     <Navbar/>
+    <Box sx={{paddingTop:'90px'}}>
     <Routes>
-        <Route path='/' Component={Home}/>
-        <Route path='/addProduct' Component={FormCreate}/>
-        <Route path='/editProduct/:id' Component={FormHome}/>
-        <Route path='/catagory/men' Component={MenShopCategory}/>
-        <Route path='/catagory/women' Component={WomenShopCategory}/>
-        <Route path='/catagory/kids' Component={KidsShopCategory}/>
-        <Route path='/listProduct' Component={ListProduct}/>
-        <Route path='/cart' Component={Cart} />
-        <Route path='/auth' Component={Auth}/>
-        <Route path='/product/:id' Component={Detail}/>
+      <Route path='/' Component={Home}/>
+      <Route path='/auth' Component={Auth}/>
+      <Route path='/dashboard' Component={Dashboard}/>
+      <Route path='/add/tour' Component={Form}/>
+      <Route path='/edit/:id' Component={Form}/>
+      <Route path='/tour/:id' Component={Detail}/>
+      <Route path='*' Component={PageNotFound}/>
     </Routes>
-    <Footer/>
-    </BrowserRouter>
     </Box>
+    </BrowserRouter>
   )
 }
 

@@ -1,78 +1,39 @@
-import {useState} from 'react'
-import {useDispatch} from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import {signUpUser,signInUser} from '../actions/user'
-import {
-  Container,
-  FormContainer,
-  Title,
-  AuthForm,
-  StyledTextField,
-  StyledButton,
-  AuthLink,
-  StyledLinkText,
-} from './styles/Auth.styles';
+import { Typography} from '@mui/material'
+import React, { useState } from 'react'
 
-const Auth = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [userData, setUserData] = useState({ name: '', email: '', password: '' });
-  const dispatch = useDispatch();
-  const history = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isSignUp) {
-      dispatch(signUpUser(userData, history));
-    } else {
-      dispatch(signInUser(userData, history));
+const Auth= () => {
+    const [isSignUp,setIsSignUp]= useState(false)
+    const handleSubmit=(e)=>{
+        e.preventDefault()
     }
-  };
-
   return (
     <>
-      <Container>
-        <FormContainer>
-          <Title>{isSignUp ? 'SignUp' : 'Login'}</Title>
-          <AuthForm>
-            {isSignUp && (
-              <StyledTextField
-                value={userData.name}
-                onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-                type="text"
-                placeholder="Your name"
-              />
-            )}
-            <StyledTextField
-              value={userData.email}
-              onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-              type="email"
-              placeholder="Email address"
-            />
-            <StyledTextField
-              value={userData.password}
-              onChange={(e) => setUserData({ ...userData, password: e.target.value })}
-              type="password"
-              placeholder="Your password"
-            />
-            <StyledButton variant="contained" onClick={handleSubmit}>
-              {isSignUp ? 'Register' : 'Login'}
-            </StyledButton>
-            {isSignUp ? (
-              <AuthLink onClick={() => setIsSignUp((prev) => !prev)}>
-                Already have an account?
-                <StyledLinkText>Login here</StyledLinkText>
-              </AuthLink>
-            ) : (
-              <AuthLink onClick={() => setIsSignUp((prev) => !prev)}>
-                Don't have an account?
-                <StyledLinkText>Register here</StyledLinkText>
-              </AuthLink>
-            )}
-          </AuthForm>
-        </FormContainer>
-      </Container>
+    <div style={{display:'flex',flexDirection:'column',
+    justifyContent:'center',alignItems:'center',
+    gap:'20px',padding:'50px'}}>
+    <div style={{display:'flex',flexDirection:'column',
+    justifyContent:'center',alignItems:'center', boxShadow:'1px 1px 1px 1px rgba(0,0,0,0.5)',}}>
+        <Typography variant='h4'>{isSignUp ? 'SignUp':'Login' }</Typography>
+        <form onSubmit={handleSubmit} style={{display:'flex',flexDirection:'column',
+        gap:'20px',width:'500px',padding:'20px'}}>
+            <div style={{display:'flex',gap:'10px',justifyContent:'space-around'}}>
+            { isSignUp &&  
+            <>
+            <input type="text" placeholder='first name' style={{width:'100%',height:'40px'}}/>
+            <input type="text" placeholder='last name' style={{width:'100%',height:'40px'}}/>
+            </>
+            }
+            </div>
+            <input type="email" placeholder='email' style={{height:'40px'}}/>
+           {isSignUp &&<input type="password" placeholder='password' style={{height:'40px'}}/>}
+            <input type="password" placeholder='confirm password' style={{height:'40px'}}/>
+            <button onClick={()=>setIsSignUp(!isSignUp)} style={{cursor:'pointer',height:'40px'}}>{isSignUp ? 'SignUp' :'Login'}</button>
+            <div onClick={()=>setIsSignUp(!isSignUp)} style={{cursor:'pointer',textAlign:'center',color:'#407090'}}>{isSignUp ? "Don't have an account ? Sign Up" :'Already have an account ?Login'}</div>
+        </form>
+        </div>
+    </div>
     </>
-  );
-};
+  )
+}
 
-export default Auth;
+export default Auth

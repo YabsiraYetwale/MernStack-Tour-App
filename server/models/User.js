@@ -1,63 +1,48 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt'
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 const userSchema = new mongoose.Schema({
-  name: {
+  firstname: {
     type: String,
   },
+  lastname: { type: String },
   email: {
     type: String,
   },
   password: {
     type: String,
   },
-  role:{
-    type:String,
-    default:'user'
-},
-  cart: [
-    {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Products',
-      },
-      quantity: {
-        type: Number,
-        default: 1,
-      },
-      totalQuantity: {
-        type: Number,
-        default: 0,
-      },
-    },
-  ],
-  date: {
-    type: Date,
-    default: Date.now(),
+  confirmpassword: {
+    type: String,
   },
-  id:{
-    type:String
-}
+  role: {
+    type: String,
+    default: "user",
+  },
+  id: {
+    type: String,
+  },
 });
 
-const User = mongoose.model('Users', userSchema);
+const User = mongoose.model("tourUsers", userSchema);
 
 export default User;
 
 const adminData = {
-  name: 'Yabsira Yetwale',
-  email: 'yabsira.yetwale@gmail.com',
-  role:'admin',
-  password: bcrypt.hashSync('1234', 6),
+  firstname: "Yabsira", 
+  lastname:"Yetwale",
+  email: "yabsira.yetwale@gmail.com",
+  role: "admin",
+  password: bcrypt.hashSync("1234", 6),
+  confirmpassword: bcrypt.hashSync("1234", 6),
 };
 
-User.findOneAndUpdate(
-  { email: adminData.email },
-  adminData,
-  { upsert: true, new: true }
-)
-.then((updatedAdmin) => {
-  // console.log('Admin saved/updated successfully:', updatedAdmin);
+User.findOneAndUpdate({ email: adminData.email }, adminData, {
+  upsert: true,
+  new: true,
 })
-.catch((error) => {
-  console.error('error', error);
-});
+  .then((updatedAdmin) => {
+    // console.log('Admin saved/updated successfully:', updatedAdmin);
+  })
+  .catch((error) => {
+    console.error("error", error);
+  });
