@@ -24,11 +24,11 @@ const Form = () => {
   const {tour}=useSelector(state=>state.tours)
 
   useEffect(()=>{
-     if(id) {
-      dispatch(fetchTour(id))
-      setInputFiles(tour)
-    }
+    setInputFiles(tour)
   },[tour])
+  useEffect(()=>{
+    dispatch(fetchTour(id))
+  },[id])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,7 +90,7 @@ const Form = () => {
               type="text"
               value={inputFiles?.tags}
               onChange={(e) =>
-                setInputFiles({ ...inputFiles, tags: e.target.value })
+                setInputFiles({ ...inputFiles, tags: e.target.value.split(',') })
               }
               placeholder="tags separated by comma ,"
               style={{ height: "40px" }}

@@ -5,15 +5,15 @@ export const tours=(state={isLoading:true,tours:[]},action)=>{
         case "END_LOADING":
             return {...state,isLoading:false}
         case "CREATE":
-            return {state,tours:[...state.tours,action.payload]}
+            return {...state,tours:action.payload}
         case "FETCH_ALL":
             return action.payload
         case "FETCH":
-            return action.payload
+            return {...state,tour:action.payload}
         case "UPDATE":
-            return state.tours.map((tour)=>tour._id === action.payload._id ? action.payload : state)
+            return {...state,tours:state?.tours?.map((tour)=>tour?._id === action?.payload?._id ? action.payload : state)}
         case "DELETE":
-            return state.tours.filter((tour)=>tour._id !== action.payload)
+            return {...state,tours:state.tours.filter((tour)=>tour._id !== action.payload)}
         default:
             return state;
     }

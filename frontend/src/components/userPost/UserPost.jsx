@@ -1,13 +1,16 @@
 import { Delete, Edit} from '@mui/icons-material'
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 import {img_url} from '../../redux/api'
+import { deleteTour } from '../../redux/actions/tours'
 const UserPost=({dashboard})=>{
     const user=JSON.parse(localStorage.getItem('profile'))
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
 
     return(
         <>
-        {user?.result?._id === dashboard?.creator
-         &&
+      { user?.result?._id === dashboard?.creator &&
         <div style={{display:'flex',position:'relative',borderRadius:'7px'}}>
             <img src={`${img_url}${dashboard.image}`} alt='image' style={{width:'300px',height:'200px',borderTopLeftRadius:'7px',borderTopRightRadius:'7px'}}/>
             <div style={{padding:'20px 0px 0px 20px',}}>
@@ -20,15 +23,14 @@ const UserPost=({dashboard})=>{
                 </Link>
                 </div>
                 <div style={{display:'flex',cursor:'pointer'}}>
-                    <Delete style={{color:'red'}}/>
+                   <div onClick={()=>dispatch(deleteTour(dashboard._id,navigate))}> <Delete style={{color:'red'}}/></div>
                     <Link to={`/edit/${dashboard._id}`}>
                         <Edit style={{color:'blue'}}/>
                     </Link>
                 </div>
             </div>
             </div>
-        </div>
-}
+        </div>}
         </>
     )
 }

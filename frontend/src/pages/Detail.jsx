@@ -1,4 +1,3 @@
-// import {tours} from '../components/utils'
 import {Link, useParams} from 'react-router-dom'
 import Comment from '../components/comments/Comment'
 import RelatedTours from '../components/relatedTours/RelatedTours'

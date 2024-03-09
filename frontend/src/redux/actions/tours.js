@@ -32,7 +32,7 @@ export const fetchTour=(id)=>async(dispatch)=>{
         console.log(error)
     }
 }
-export const updateTour=(id,tour)=>async(dispatch)=>{
+export const updateTour=(id,tour,navigate)=>async(dispatch)=>{
     try {
         dispatch({type:"START_LOADING"})
         const {data}= await api.updateTour(id,tour)
@@ -43,11 +43,12 @@ export const updateTour=(id,tour)=>async(dispatch)=>{
         console.log(error)
     }
 }
-export const deleteTour=(id)=>async(dispatch)=>{
+export const deleteTour=(id,navigate)=>async(dispatch)=>{
     try {
         dispatch({type:"START_LOADING"})
         await api.deleteTour(id)
         dispatch({type:"DELETE",payload:id})
+        navigate('/dashboard')
         dispatch({type:"END_LOADING"})
     } catch (error) {
         console.log(error)
