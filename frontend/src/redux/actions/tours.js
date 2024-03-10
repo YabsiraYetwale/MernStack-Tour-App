@@ -32,6 +32,23 @@ export const fetchTour=(id)=>async(dispatch)=>{
         console.log(error)
     }
 }
+export const fetchTourBySearch=(searchQuery,navigate)=>async(dispatch)=>{
+    try {
+        dispatch({type:"START_LOADING"})
+        const {data}= await api.fetchTourBySearch(searchQuery)
+        const title= data.tours.map(tour=>(tour.title))
+        if(title?.length){ 
+           dispatch({type:"SEARCH",payload:data})
+           navigate(`/tours/search?searchQuery=${searchQuery}`) 
+        }
+        else{
+            navigate(`/tours/search/no_result`) 
+        }
+       dispatch({type:"END_LOADING"})
+    } catch (error) {
+        console.log(error)
+    }
+}
 export const updateTour=(id,tour,navigate)=>async(dispatch)=>{
     try {
         dispatch({type:"START_LOADING"})

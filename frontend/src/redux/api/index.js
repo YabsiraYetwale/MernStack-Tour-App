@@ -16,5 +16,6 @@ export const img_url= 'http://localhost:5000/images/'
 export const createTour=(tour)=>API.post('/tours',tour)
 export const fetchTours=()=>API.get('/tours')
 export const fetchTour=(id)=>API.get(`/tours/${id}`)
+export const fetchTourBySearch=(searchQuery)=>API.get(`/tours/tour/search?searchQuery=${searchQuery}`)
 export const updateTour=(id,tour)=>API.patch(`/tours/${id}`,tour)
 export const deleteTour=(id)=>API.delete(`/tours/${id}`)

@@ -1,6 +1,7 @@
 import React from 'react'
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import {BrowserRouter,Routes,Route, Navigate} from 'react-router-dom'
 import Home from './pages/Home'
+import Noresult from './components/noresult/Noresult'
 import Auth from './pages/Auth'
 import Detail from './pages/Detail'
 import Dashboard from './pages/Dashbord'
@@ -14,7 +15,10 @@ const App = () => {
     <Navbar/>
     <Box sx={{paddingTop:'90px'}}>
     <Routes>
-      <Route path='/' Component={Home}/>
+      <Route path='/' Component={()=><Navigate to={'/tours'}/>}/>
+      <Route path='/tours' Component={Home}/>
+      <Route path='/tours/search' Component={Home}/>
+      <Route path='/tours/search/no_result' Component={Noresult}/>
       <Route path='/auth' Component={Auth}/>
       <Route path='/dashboard' Component={Dashboard}/>
       <Route path='/add/tour' Component={Form}/>
