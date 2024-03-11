@@ -43,15 +43,23 @@ const Tour = ({ tour }) => {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              color: "#345656",
             }}
           >
-            <div style={{ display: "flex", gap: "8px" }}>
-              {tour?.tags?.map((tags, i) => (
-                <div key={i}>#{tags}</div>
-              ))}
+            <div style={{ display: "flex", gap: "8px", color: "#345656" }}>
+              #{tour?.tags}
             </div>
-            <div><Like/>{tour.likes} Likes</div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "8px",
+                color: "#0000ff",
+              }}
+            >
+              <ThumbUpAlt />
+              {tour.likes} Likes
+            </div>
           </div>
           <div
             style={{

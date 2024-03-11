@@ -9,9 +9,10 @@ const Form = () => {
   const [inputFiles, setInputFiles] = useState({
     title: "",
     description: "",
-    tags: "",
+    tags: [],
     image: "",
   });
+
   const formData = new FormData();
   formData.append("title", inputFiles?.title);
   formData.append("description", inputFiles?.description);
@@ -91,7 +92,7 @@ const Form = () => {
             ></textarea>
             <input
               type="text"
-              value={inputFiles?.tags}
+              value={inputFiles?.tags?.join("  #")}
               onChange={(e) =>
                 setInputFiles({
                   ...inputFiles,
