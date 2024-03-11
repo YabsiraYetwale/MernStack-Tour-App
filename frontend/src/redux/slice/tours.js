@@ -1,17 +1,17 @@
-export const tours=(state={isLoading:true,tours:[],relatedTours:[]},action)=>{
+export const tours=(state={isLoading:true,tours:[]},action)=>{
     switch (action.type) {
         case "START_LOADING":
             return {...state,isLoading:true}
         case "END_LOADING":
             return {...state,isLoading:false}
         case "CREATE":
-            return {...state,tours:action.payload}
+            return {...state,...action.payload}
         case "FETCH_ALL":
-            return action.payload
+            return {...state,...action.payload}
         case "FETCH":
-            return action.payload
+            return {...state,...action.payload}
         case "SEARCH":
-            return action.payload
+            return {...state,...action.payload}
         case "UPDATE":
             return {...state,tours:state?.tours?.map((tour)=>tour?._id === action?.payload?._id ? action.payload : state)}
         case "DELETE":

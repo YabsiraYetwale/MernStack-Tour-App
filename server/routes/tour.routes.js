@@ -7,7 +7,7 @@ import {
   getTour,
   getTours,
   updateTour,
-  getTourBySearch
+  getTourBySearch,
 } from "../controllers/tour.controller.js";
 import { auth } from "../middlewares/auth.js";
 const tourRouter = express.Router();

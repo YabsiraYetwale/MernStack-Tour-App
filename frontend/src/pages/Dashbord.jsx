@@ -1,11 +1,10 @@
-
-import UserPosts from "../components/userPost/UserPosts"
+import UserPosts from "../components/userPost/UserPosts";
 const Dashboard = () => {
   return (
     <>
-    <UserPosts/>
+      <UserPosts />
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

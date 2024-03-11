@@ -22,9 +22,8 @@ const tourSchema=new mongoose.Schema({
     creator:{
         type:String,
     },
-    creatorname:{
-        type:String,
-    }
+    creatorfname:String,
+    creatorlname:String, 
 })
 const Tour=mongoose.model('tours',tourSchema)
 export default Tour

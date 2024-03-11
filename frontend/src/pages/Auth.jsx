@@ -11,13 +11,15 @@ const Auth = () => {
     lastname: "",
     email: "",
     password: "",
-    confirmpassword:""
+    confirmpassword: "",
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    isSignUp ? dispatch(signIn(formData,navigate)) : dispatch(signUp(formData,navigate));
+    isSignUp
+      ? dispatch(signIn(formData, navigate))
+      : dispatch(signUp(formData, navigate));
   };
   return (
     <>
@@ -40,7 +42,7 @@ const Auth = () => {
             boxShadow: "1px 1px 1px 1px rgba(0,0,0,0.5)",
           }}
         >
-          <Typography variant="h4">{isSignUp ? "Login": "SignUp" }</Typography>
+          <Typography variant="h4">{isSignUp ? "Login" : "SignUp"}</Typography>
           <form
             onSubmit={handleSubmit}
             style={{
@@ -63,14 +65,18 @@ const Auth = () => {
                   <input
                     type="text"
                     value={formData.firstname}
-                    onChange={(e)=>setformData({...formData,firstname:(e.target.value)})}
+                    onChange={(e) =>
+                      setformData({ ...formData, firstname: e.target.value })
+                    }
                     placeholder="first name"
                     style={{ width: "100%", height: "40px" }}
                   />
                   <input
                     type="text"
                     value={formData.lastname}
-                    onChange={(e)=>setformData({...formData,lastname:(e.target.value)})}
+                    onChange={(e) =>
+                      setformData({ ...formData, lastname: e.target.value })
+                    }
                     placeholder="last name"
                     style={{ width: "100%", height: "40px" }}
                   />
@@ -80,28 +86,35 @@ const Auth = () => {
             <input
               type="email"
               value={formData.email}
-              onChange={(e)=>setformData({...formData,email:(e.target.value)})}
+              onChange={(e) =>
+                setformData({ ...formData, email: e.target.value })
+              }
               placeholder="email"
               style={{ height: "40px" }}
             />
+            <input
+              type="password"
+              value={formData.password}
+              onChange={(e) =>
+                setformData({ ...formData, password: e.target.value })
+              }
+              placeholder="password"
+              style={{ height: "40px" }}
+            />
+
+            {!isSignUp && (
               <input
                 type="password"
-                value={formData.password}
-                onChange={(e)=>setformData({...formData,password:(e.target.value)})}
-                placeholder="password"
+                value={formData.confirmpassword}
+                onChange={(e) =>
+                  setformData({ ...formData, confirmpassword: e.target.value })
+                }
+                placeholder="confirm password"
                 style={{ height: "40px" }}
               />
-            
-          { !isSignUp &&(
-           <input
-              type="password"
-              value={formData.confirmpassword}
-              onChange={(e)=>setformData({...formData,confirmpassword:(e.target.value)})}
-              placeholder="confirm password"
-              style={{ height: "40px" }}
-            />)}
+            )}
             <button style={{ cursor: "pointer", height: "40px" }}>
-              {isSignUp ? "Login" :"SignUp"  }
+              {isSignUp ? "Login" : "SignUp"}
             </button>
             <div
               onClick={() => setIsSignUp(!isSignUp)}
@@ -113,8 +126,7 @@ const Auth = () => {
             >
               {isSignUp
                 ? "Don't have an account ? Sign Up"
-                : "Already have an account ?Login"
-                }
+                : "Already have an account ?Login"}
             </div>
           </form>
         </div>

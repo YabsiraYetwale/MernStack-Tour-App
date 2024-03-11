@@ -1,37 +1,71 @@
-import { Delete, Edit} from '@mui/icons-material'
-import {Link,useNavigate} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
-import {img_url} from '../../redux/api'
-import { deleteTour } from '../../redux/actions/tours'
-const UserPost=({dashboard})=>{
-    const user=JSON.parse(localStorage.getItem('profile'))
-    const dispatch=useDispatch()
-    const navigate=useNavigate()
+import { Delete, Edit } from "@mui/icons-material";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { img_url } from "../../redux/api";
+import { deleteTour } from "../../redux/actions/tours";
+const UserPost = ({ dashboard }) => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    return(
-        <>
-      { user?.result?._id === dashboard?.creator &&
-        <div style={{display:'flex',position:'relative',borderRadius:'7px'}}>
-            <img src={`${img_url}${dashboard.image}`} alt='image' style={{width:'300px',height:'200px',borderTopLeftRadius:'7px',borderTopRightRadius:'7px'}}/>
-            <div style={{padding:'20px 0px 0px 20px',}}>
-            <div style={{fontWeight:'bolder',fontSize:'25px',paddingBottom:'10px'}}>{dashboard.title}</div>
-            <div style={{position:'absolute',top:'20px',left:'20px',color:'#fff',fontWeight:'bolder',fontSize:'25px'}}>{dashboard.creator}</div>
-               <div style={{display:'flex',justifyContent:'space-between',color:'#345656'}}>
-            <div style={{width:'350px'}}>{dashboard.description} 
-            <Link to={`/tour/${dashboard._id}`} style={{textDecoration:'none'}}>
-                Read More
+  return (
+    <>
+      {user?.result?._id === dashboard?.creator && (
+        <div
+          style={{ display: "flex", position: "relative", borderRadius: "7px" }}
+        >
+          <img
+            src={`${img_url}${dashboard.image}`}
+            alt="image"
+            style={{
+              width: "300px",
+              height: "200px",
+              borderTopLeftRadius: "7px",
+              borderTopRightRadius: "7px",
+            }}
+          />
+          <div style={{ padding: "20px 0px 0px 20px" }}>
+            <div
+              style={{
+                fontWeight: "bolder",
+                fontSize: "25px",
+                paddingBottom: "10px",
+              }}
+            >
+              {dashboard.title}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                color: "#345656",
+              }}
+            >
+              <div style={{ width: "350px" }}>
+                {dashboard.description}
+                <Link
+                  to={`/tour/${dashboard._id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  Read More
                 </Link>
+              </div>
+              <div style={{ display: "flex", cursor: "pointer" }}>
+                <div
+                  onClick={() => dispatch(deleteTour(dashboard._id, navigate))}
+                >
+                  {" "}
+                  <Delete style={{ color: "red" }} />
                 </div>
-                <div style={{display:'flex',cursor:'pointer'}}>
-                   <div onClick={()=>dispatch(deleteTour(dashboard._id,navigate))}> <Delete style={{color:'red'}}/></div>
-                    <Link to={`/edit/${dashboard._id}`}>
-                        <Edit style={{color:'blue'}}/>
-                    </Link>
-                </div>
+                <Link to={`/edit/${dashboard._id}`}>
+                  <Edit style={{ color: "blue" }} />
+                </Link>
+              </div>
             </div>
-            </div>
-        </div>}
-        </>
-    )
-}
-export default UserPost
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+export default UserPost;

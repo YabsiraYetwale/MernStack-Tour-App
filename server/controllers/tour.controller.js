@@ -1,3 +1,4 @@
+import { tours } from "../../frontend/src/redux/slice/tours.js";
 import Tour from "../models/Tour.js";
 
 export const createTour = async (req, res) => {
@@ -47,7 +48,7 @@ export const updateTour = async (req, res) => {
     const { id } = req.params;
     const updatedTour = await Tour.findByIdAndUpdate(
       id,
-      { ...tour, image: req?.file?.filename, creator: req.userId },
+      { ...tour, image:req?.file?.filename, creator: req.userId },
       { new: true }
     );
     if (updatedTour) return res.json({ updatedTour });

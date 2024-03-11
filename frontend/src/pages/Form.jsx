@@ -1,15 +1,15 @@
-import {useEffect, useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
-import {createTour,updateTour,fetchTour} from '../redux/actions/tours'
+import { createTour, updateTour, fetchTour } from "../redux/actions/tours";
 const Form = () => {
-  const user=JSON.parse(localStorage.getItem('profile'))
+  const user = JSON.parse(localStorage.getItem("profile"));
   const [inputFiles, setInputFiles] = useState({
     title: "",
     description: "",
-    tags: [],
+    tags: "",
     image: "",
   });
   const formData = new FormData();
@@ -17,26 +17,27 @@ const Form = () => {
   formData.append("description", inputFiles?.description);
   formData.append("tags", inputFiles?.tags);
   formData.append("image", inputFiles?.image);
+  formData.append("creatorfname", user?.result?.firstname);
+  formData.append("creatorlname", user?.result?.lastname);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const {tour}=useSelector(state=>state.tours)
+  const { isLoading, tour } = useSelector((state) => state.tours);
 
-  useEffect(()=>{
-    setInputFiles(tour)
-  },[tour])
-  useEffect(()=>{
-    dispatch(fetchTour(id))
-  },[id])
+  useEffect(() => {
+    if (id) setInputFiles(tour);
+  }, [id, tour]);
+  useEffect(() => {
+    if (id) dispatch(fetchTour(id));
+  }, [id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(id){
-      dispatch(updateTour(id,formData,navigate))
-    }
-    else{
-      dispatch(createTour(formData,navigate))
+    if (id) {
+      dispatch(updateTour(id, formData, navigate));
+    } else {
+      dispatch(createTour(formData, navigate));
     }
   };
   return (
@@ -80,7 +81,9 @@ const Form = () => {
               }
               style={{ height: "40px" }}
             />
-            <textarea cols="30" rows="10" 
+            <textarea
+              cols="30"
+              rows="10"
               value={inputFiles?.description}
               onChange={(e) =>
                 setInputFiles({ ...inputFiles, description: e.target.value })
@@ -90,18 +93,28 @@ const Form = () => {
               type="text"
               value={inputFiles?.tags}
               onChange={(e) =>
-                setInputFiles({ ...inputFiles, tags: e.target.value.split(',') })
+                setInputFiles({
+                  ...inputFiles,
+                  tags: e.target.value.split(","),
+                })
               }
-              placeholder="tags separated by comma ,"
+              placeholder="tags (separated by comma ,)"
               style={{ height: "40px" }}
             />
-            <input type="file" 
+            <input
+              type="file"
               onChange={(e) =>
-                setInputFiles({ ...inputFiles, image:e.target.files[0] })
+                setInputFiles({ ...inputFiles, image: e.target.files[0] })
               }
             />
             <button style={{ cursor: "pointer", height: "40px" }}>
-              {id ? "Edit" : "Create"}
+              <div>
+                {id ? (
+                  <div>{isLoading ? "Editing ..." : "Edit"}</div>
+                ) : (
+                  <div>{isLoading ? "Creating ..." : "Create"}</div>
+                )}
+              </div>
             </button>
           </form>
         </div>

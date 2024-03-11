@@ -15,7 +15,6 @@ export const fetchTours=()=>async(dispatch)=>{
     try {
         dispatch({type:"START_LOADING"})
         const {data}= await api.fetchTours()
-        console.log(data)
         dispatch({type:"FETCH_ALL",payload:data})
         dispatch({type:"END_LOADING"})
     } catch (error) {

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const RelatedTours = () => {
   const { id } = useParams();
-  const { tours } = useSelector((state) => state.tours);
+  const {tours} = useSelector((state) => state.tours);
   const relatedTours = tours?.filter((tour) => tour._id !== id);
 
   return (
@@ -35,7 +35,7 @@ const RelatedTours = () => {
           gap: "9.3rem",
         }}
       >
-        {relatedTours?.map((tour, i) => (
+        {relatedTours?.slice(0,3)?.map((tour, i) => (
           <div key={i}>
             <RelatedTour tour={tour} />
           </div>
