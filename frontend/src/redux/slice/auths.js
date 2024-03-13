@@ -8,7 +8,7 @@ export const auths=(state={isLoading:true,auths:[]},action)=>{
             localStorage.setItem('profile',JSON.stringify({...action.payload})) 
             return {state,auths:[...state.auths,action.payload]}
         case "LOGOUT":
-            localStorage.clear() 
+           localStorage.clear();
             return {state,auths:[...state.auths,null]}
         default:
             return state;

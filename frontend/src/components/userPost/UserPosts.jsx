@@ -1,14 +1,16 @@
 import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTours } from "../../redux/actions/tours";
+import { useNavigate } from "react-router-dom";
+import { fetchTourByUser, fetchTours } from "../../redux/actions/tours";
 import UserPost from "./UserPost";
 const UserPosts = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { isLoading, tours } = useSelector((state) => state.tours);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(fetchTours());
+    dispatch(fetchTourByUser(user?.result?._id,navigate));
   }, [dispatch]);
   if (isLoading || !tours) {
     return (
@@ -30,7 +32,8 @@ const UserPosts = () => {
           width: "100%",
         }}
       >
-        <div
+       
+      <div
           style={{
             color: "rgba(44,200,255,1)",
             fontWeight: "bolder",

@@ -7,10 +7,15 @@ const UserPost = ({ dashboard }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const excerpt = (str) =>{
+    if (str.length > 45){
+      str = str.substring(0,45) + "..."
+    }
+    return str
+  }
+  
   return (
     <>
-      {user?.result?._id === dashboard?.creator && (
         <div
           style={{ display: "flex", position: "relative", borderRadius: "7px" }}
         >
@@ -42,7 +47,7 @@ const UserPost = ({ dashboard }) => {
               }}
             >
               <div style={{ width: "350px" }}>
-                {dashboard.description}
+                {excerpt(dashboard.description)}
                 <Link
                   to={`/tour/${dashboard._id}`}
                   style={{ textDecoration: "none" }}
@@ -64,7 +69,6 @@ const UserPost = ({ dashboard }) => {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 };

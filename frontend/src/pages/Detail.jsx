@@ -64,7 +64,12 @@ const Detail = () => {
                   <div key={i}>#{tag}</div>
                 ))}
               </div>
-              <div>{tour?.likes} Likes</div>
+              {tour?.likes?.length > 0 && (
+                <div>
+                  {tour?.likes?.length}
+                  {tour?.likes?.length > 1 ? "Likes" : "Like"}
+                </div>
+              )}{" "}
               <div>{moment(tour?.createdAt).fromNow()}</div>
               <div>{tour?.description}</div>
             </div>

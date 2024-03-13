@@ -11,9 +11,23 @@ const tourSchema=new mongoose.Schema({
         type:String,
     },
     likes:{
-        type:Number,
-        default:0,
+        type:[String],
+        default:[],
     },
+    comments:[
+       { 
+        commentsId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'tourUsers',
+          },
+        comment:String,
+        commentator:String,
+        commentedAt:{
+            type: Date,
+            default: Date.now(),
+        }
+        }
+        ],
     tags:[String],
     createdAt: {
         type: Date,

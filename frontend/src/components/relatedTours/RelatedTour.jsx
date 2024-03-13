@@ -38,7 +38,6 @@ const RelatedTour = ({ tour }) => {
                 <div key={i}>#{tag}</div>
               ))}
             </div>
-            <div>{tour.likes} Likes</div>
           </div>
           <div style={{ fontWeight: "bolder", padding: "30px 0px 10px 0px" }}>
             {tour.title}

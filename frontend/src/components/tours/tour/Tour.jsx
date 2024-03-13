@@ -1,7 +1,18 @@
-import { ThumbUpAlt } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { ThumbUpAlt, ThumbUpAltOutlined } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { likeTour } from "../../../redux/actions/tours";
 import { img_url } from "../../../redux/api";
 const Tour = ({ tour }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const excerpt = (str) => {
+    if (str?.length > 45) {
+      str = str.substring(0, 45) + "...";
+    }
+    return str;
+  };
   return (
     <>
       <div
@@ -48,18 +59,33 @@ const Tour = ({ tour }) => {
             <div style={{ display: "flex", gap: "8px", color: "#345656" }}>
               #{tour?.tags}
             </div>
-            <div
+            <button
               style={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                cursor: "pointer",
                 gap: "8px",
                 color: "#0000ff",
+                backgroundColor: "transparent",
+                border: "none",
               }}
+              disabled={!user?.result}
+              onClick={() => dispatch(likeTour(tour._id, navigate))}
             >
-              <ThumbUpAlt />
-              {tour.likes} Likes
-            </div>
+              {tour?.likes?.find((like) => like === user?.result?._id) &&
+              user?.result ? (
+                <ThumbUpAlt />
+              ) : (
+                <ThumbUpAltOutlined />
+              )}
+              {tour?.likes?.length > 0 &&
+              <div>
+                  {tour?.likes?.length}&nbsp;
+                  {tour?.likes?.length > 1 ? "Likes" : "Like"}             
+              </div>
+              }
+            </button>
           </div>
           <div
             style={{
@@ -71,7 +97,7 @@ const Tour = ({ tour }) => {
             {tour.title}
           </div>
           <div>
-            {tour.description}{" "}
+            {excerpt(tour.description)}{" "}
             <Link to={`/tour/${tour._id}`} style={{ textDecoration: "none" }}>
               Read More
             </Link>
