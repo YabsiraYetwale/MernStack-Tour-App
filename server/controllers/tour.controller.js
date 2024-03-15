@@ -1,4 +1,3 @@
-import { tours } from "../../frontend/src/redux/slice/tours.js";
 import Tour from "../models/Tour.js";
 import User from "../models/User.js";
 

@@ -4,7 +4,7 @@ import { CircularProgress } from "@mui/material";
 import Tour from "./tour/Tour";
 import { LargerBox } from "./styles";
 const Tours = () => {
-  const { isLoading, tours } = useSelector((state) => state.tours);
+  const { isLoading, tours } = useSelector((state) =>state.tours);
   return (
     <>
       {isLoading ? (

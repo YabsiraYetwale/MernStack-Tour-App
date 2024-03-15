@@ -1,5 +1,4 @@
 import * as api from '../api'
-
 export const createTour=(tour,navigate)=>async(dispatch)=>{
     try {
         dispatch({type:"START_LOADING"})

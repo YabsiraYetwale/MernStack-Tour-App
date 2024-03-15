@@ -3,7 +3,6 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
 import {useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import FormComment from "./FormComment";
 import Post from "./Post";
 import {
   CustomCommentBox,
@@ -29,7 +28,7 @@ const Comment = () => {
           <Box paddingTop="90px">
             <hr />
           </Box>
-          {/* <Link to={`/comment/${tour?._id}`} style={{textDecoration:'none'}}>
+          <Link to={`/comment/${tour?._id}`} style={{textDecoration:'none'}}>
           <Form >
             <CustomAccountBox />
             <CustomTextField
@@ -40,8 +39,7 @@ const Comment = () => {
               comment
             </CommentButton>
         </Form>
-          </Link> */}
-          <FormComment/> 
+          </Link>
           <Typography paddingLeft="60px">
             {tour?.comments?.length} comments
           </Typography>
