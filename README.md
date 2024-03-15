@@ -1,2 +1,3 @@
 # MernStack-Tour-App
-not finished yet still in progress
+deployed frontend link ---- https://tourwithyab.netlify.app/tours
+deployed server link ---- https://tour-server-is2n.onrender.com/tours
