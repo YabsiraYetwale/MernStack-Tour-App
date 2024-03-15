@@ -24,6 +24,9 @@ export const SingleBox = styled(Card)({
   flexWrap: "wrap",
   position: "relative",
   borderRadius: "7px",
+  "@media(max-width:900px)": {
+    width: "350px",
+  },
 });
 export const CustomCardMedia = styled(CardMedia)({
   width: "300px",
@@ -32,6 +35,7 @@ export const CustomCardMedia = styled(CardMedia)({
   borderTopRightRadius: "7px",
   "@media(max-width:900px)": {
     width: "100%",
+    height:"270px"
   },
 });
 export const TitleBox = styled(Box)({
@@ -43,9 +47,11 @@ export const DescriptionBox = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
   color: "#345656",
+  gap:"2rem"
 });
 
 export const EditBox = styled(Box)({
   display: "flex",
+  gap:"1rem",
   cursor: "pointer",
 });
