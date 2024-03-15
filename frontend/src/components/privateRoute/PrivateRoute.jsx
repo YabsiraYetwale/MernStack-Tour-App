@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { BoxContainer, RedirectTypography } from "./styles";
 
 const Redirect = () => {
   const [count, setCount] = useState(5);
@@ -9,38 +10,22 @@ const Redirect = () => {
       setCount((currentCount) => --currentCount);
     }, 1000);
     count === 0 && navigate("/auth");
-    return ()=> clearInterval(interval);
+    return () => clearInterval(interval);
   }, [count, navigate]);
   return (
     <>
-     <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "2rem",
-          width: "100%",
-        }}
-      >
-        <div
-          style={{
-            color: "rgba(44,200,255,1)",
-            fontWeight: "bolder",
-            fontSize: "35px",
-          }}
-        >
-            Redirecting you in {count} seconds
-        </div>
-
-        </div>
+      <BoxContainer>
+        <RedirectTypography>
+          Redirecting you in {count} seconds
+        </RedirectTypography>
+      </BoxContainer>
     </>
   );
 };
-const PrivateRoute = ({children}) => {
-    const user=JSON.parse(localStorage.getItem('profile'))
-  return user?.result ? children : <Redirect/>
+
+const PrivateRoute = ({ children }) => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  return user?.result ? children : <Redirect />;
 };
 
 export default PrivateRoute;

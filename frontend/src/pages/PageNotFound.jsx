@@ -1,11 +1,11 @@
-import React from "react";
+import { Box } from "@mui/material";
 import p404 from "../assets/404.webp";
 const PageNotFound = () => {
   return (
     <>
-      <div>
+      <Box>
         <img src={p404} alt="404" style={{ width: "100%", height: "100vh" }} />
-      </div>
+      </Box>
     </>
   );
 };

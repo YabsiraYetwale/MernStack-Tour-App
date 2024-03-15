@@ -28,7 +28,7 @@ const upload = multer({ storage });
 tourRouter.post("/", auth, upload.single("image"), createTour);
 tourRouter.get("/", getTours);
 tourRouter.get("/:id", getTour);
-tourRouter.get("/userTours/:id",auth, getToursByUser);
+tourRouter.get("/userTours/:id", auth, getToursByUser);
 tourRouter.get("/tour/search", getTourBySearch);
 tourRouter.patch("/:id", auth, upload.single("image"), updateTour);
 tourRouter.delete("/:id", auth, deleteTour);

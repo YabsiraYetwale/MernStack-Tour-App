@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Typography, TextField, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { createTour, updateTour, fetchTour } from "../redux/actions/tours";
+import {
+  BoxContainer,
+  CustomButton,
+  CustomCard,
+  CustomForm,
+  CustomTextField,
+} from "./styles/form.styles";
 const Form = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [inputFiles, setInputFiles] = useState({
@@ -43,54 +50,28 @@ const Form = () => {
   };
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "20px",
-          padding: "30px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            boxShadow: "1px 1px 1px 1px rgba(0,0,0,0.5)",
-          }}
-        >
+      <BoxContainer>
+        <CustomCard>
           <Typography variant="h4">{id ? "Edit Tour" : "Add Tour"}</Typography>
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              width: "500px",
-              padding: "20px",
-            }}
-          >
-            <input
+          <CustomForm onSubmit={handleSubmit}>
+            <TextField
               type="text"
               placeholder="title"
               value={inputFiles?.title}
               onChange={(e) =>
                 setInputFiles({ ...inputFiles, title: e.target.value })
               }
-              style={{ height: "40px" }}
             />
-            <textarea
+            <CustomTextField
               cols="30"
               rows="10"
+              placeholder="description"
               value={inputFiles?.description}
               onChange={(e) =>
                 setInputFiles({ ...inputFiles, description: e.target.value })
               }
-            ></textarea>
-            <input
+            />
+            <TextField
               type="text"
               value={inputFiles?.tags?.join("  #")}
               onChange={(e) =>
@@ -100,7 +81,6 @@ const Form = () => {
                 })
               }
               placeholder="tags (separated by comma ,)"
-              style={{ height: "40px" }}
             />
             <input
               type="file"
@@ -108,18 +88,22 @@ const Form = () => {
                 setInputFiles({ ...inputFiles, image: e.target.files[0] })
               }
             />
-            <button style={{ cursor: "pointer", height: "40px" }}>
-              <div>
+            <CustomButton onClick={handleSubmit}>
+              <Box>
                 {id ? (
-                  <div>{isLoading ? "Editing ..." : "Edit"}</div>
+                  <Typography>
+                    {isLoading ? "UPDATING ..." : "UPDATE"}
+                  </Typography>
                 ) : (
-                  <div>{isLoading ? "Creating ..." : "Create"}</div>
+                  <Typography>
+                    {isLoading ? "CREATING ..." : "CREATE"}
+                  </Typography>
                 )}
-              </div>
-            </button>
-          </form>
-        </div>
-      </div>
+              </Box>
+            </CustomButton>
+          </CustomForm>
+        </CustomCard>
+      </BoxContainer>
     </>
   );
 };

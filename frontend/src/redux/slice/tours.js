@@ -9,9 +9,10 @@ export const tours=(state={isLoading:true,tours:[]},action)=>{
         case "FETCH_BY_USER":
         case "FETCH":
         case "SEARCH":
+            return {...state,...action.payload}
         case "COMMENT":
             return {...state,...action.payload}
-                case "UPDATE":
+        case "UPDATE":
         case "LIKE":
             return {...state,tours:state?.tours?.map((tour)=>tour?._id === action?.payload?._id ? action.payload : state)}
         case "DELETE":

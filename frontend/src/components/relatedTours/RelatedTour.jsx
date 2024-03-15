@@ -1,49 +1,20 @@
+import { CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { img_url } from "../../redux/api";
+import { CustomCard, CustomCardMedia, CustomTypography } from "./styles";
 const RelatedTour = ({ tour }) => {
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          position: "relative",
-          width: "20rem",
-          borderRadius: "7px",
-        }}
-      >
+      <CustomCard>
         <Link to={`/tour/${tour._id}`}>
           {" "}
-          <img
-            src={`${img_url}${tour.image}`}
-            alt="image"
-            style={{
-              width: "100%",
-              height: "200px",
-              borderTopLeftRadius: "7px",
-              borderTopRightRadius: "7px",
-            }}
-          />
+          <CustomCardMedia image={`${img_url}${tour.image}`} alt="image" />
         </Link>
-        <div style={{ padding: "20px 0px 40px 20px" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              color: "#345656",
-            }}
-          >
-            <div style={{ display: "flex", gap: "8px" }}>
-              {tour.tags.map((tag, i) => (
-                <div key={i}>#{tag}</div>
-              ))}
-            </div>
-          </div>
-          <div style={{ fontWeight: "bolder", padding: "30px 0px 10px 0px" }}>
-            {tour.title}
-          </div>
-        </div>
-      </div>
+        <CardContent>
+          <Typography>#{tour?.tags}</Typography>
+          <CustomTypography>{tour.title}</CustomTypography>
+        </CardContent>
+      </CustomCard>
     </>
   );
 };

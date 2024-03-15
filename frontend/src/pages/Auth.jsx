@@ -1,8 +1,17 @@
-import { Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../redux/actions/auth";
+import {
+  AuthButton,
+  AuthTypography,
+  BoxContainer,
+  CustomCard,
+  CustomForm,
+  CustomTextField2,
+  NameBox,
+} from "./styles/form.styles";
 
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -23,114 +32,70 @@ const Auth = () => {
   };
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "20px",
-          padding: "50px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            boxShadow: "1px 1px 1px 1px rgba(0,0,0,0.5)",
-          }}
-        >
+      <BoxContainer>
+        <CustomCard>
           <Typography variant="h4">{isSignUp ? "Login" : "SignUp"}</Typography>
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              width: "500px",
-              padding: "20px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: "10px",
-                justifyContent: "space-around",
-              }}
-            >
+          <CustomForm onSubmit={handleSubmit}>
+            <NameBox>
               {!isSignUp && (
                 <>
-                  <input
+                  <CustomTextField2
                     type="text"
                     value={formData.firstname}
                     onChange={(e) =>
                       setformData({ ...formData, firstname: e.target.value })
                     }
                     placeholder="first name"
-                    style={{ width: "100%", height: "40px" }}
                   />
-                  <input
+                  <CustomTextField2
                     type="text"
                     value={formData.lastname}
                     onChange={(e) =>
                       setformData({ ...formData, lastname: e.target.value })
                     }
                     placeholder="last name"
-                    style={{ width: "100%", height: "40px" }}
                   />
                 </>
               )}
-            </div>
-            <input
+            </NameBox>
+            <TextField
               type="email"
               value={formData.email}
               onChange={(e) =>
                 setformData({ ...formData, email: e.target.value })
               }
               placeholder="email"
-              style={{ height: "40px" }}
             />
-            <input
+            <TextField
               type="password"
               value={formData.password}
               onChange={(e) =>
                 setformData({ ...formData, password: e.target.value })
               }
               placeholder="password"
-              style={{ height: "40px" }}
             />
 
             {!isSignUp && (
-              <input
+              <TextField
                 type="password"
                 value={formData.confirmpassword}
                 onChange={(e) =>
                   setformData({ ...formData, confirmpassword: e.target.value })
                 }
                 placeholder="confirm password"
-                style={{ height: "40px" }}
               />
             )}
-            <button style={{ cursor: "pointer", height: "40px" }}>
+            <AuthButton onClick={handleSubmit} variant="outlined">
               {isSignUp ? "Login" : "SignUp"}
-            </button>
-            <div
-              onClick={() => setIsSignUp(!isSignUp)}
-              style={{
-                cursor: "pointer",
-                textAlign: "center",
-                color: "#407090",
-              }}
-            >
+            </AuthButton>
+            <AuthTypography onClick={() => setIsSignUp(!isSignUp)}>
               {isSignUp
-                ? "Don't have an account ? Sign Up"
-                : "Already have an account ?Login"}
-            </div>
-          </form>
-        </div>
-      </div>
+                ? "Don't have an account? Sign Up"
+                : "Already have an account? Login"}
+            </AuthTypography>
+          </CustomForm>
+        </CustomCard>
+      </BoxContainer>
     </>
   );
 };

@@ -6,7 +6,12 @@ import { useEffect } from "react";
 import moment from "moment";
 import { fetchTour, fetchTours } from "../redux/actions/tours";
 import { img_url } from "../redux/api";
-import { CircularProgress } from "@mui/material";
+import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
+import {
+  BoxContainer,
+  CustomCardMedia,
+  CustomTypography,
+} from "./styles/detail.styles";
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -24,59 +29,29 @@ const Detail = () => {
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            position: "relative",
-            borderRadius: "7px",
-            padding: "0 40px 20px 40px",
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column" }}>
+        <BoxContainer>
+          <Card>
             <Link to={`/tour/${tour?._id}`} />
-            <img
-              src={`${img_url}${tour?.image}`}
-              alt="image"
-              style={{
-                width: "100%",
-                height: "400px",
-                borderTopLeftRadius: "7px",
-                borderTopRightRadius: "7px",
-              }}
-            />
-            <div style={{ padding: "0px 0px 40px 20px" }}>
-              <div
-                style={{
-                  fontWeight: "bolder",
-                  fontSize: "25px",
-                  padding: "30px 0px 10px 0px",
-                  textAlign: "center",
-                }}
-              >
-                {tour?.title}
-              </div>
-              <div style={{ fontWeight: "bolder" }}>
+            <CustomCardMedia src={`${img_url}${tour?.image}`} alt="image" />
+            <CardContent>
+              <CustomTypography>{tour?.title}</CustomTypography>
+              <Typography fontWeight="bolder">
                 Created By: {tour?.creatorfname} {tour?.creatorlname}
-              </div>
-              <div style={{ display: "flex", gap: "8px" }}>
-                {tour?.tags?.map((tag, i) => (
-                  <div key={i}>#{tag}</div>
-                ))}
-              </div>
+              </Typography>
+                <Typography>#{tour?.tags}</Typography>
               {tour?.likes?.length > 0 && (
-                <div>
+                <Typography>
                   {tour?.likes?.length}
                   {tour?.likes?.length > 1 ? "Likes" : "Like"}
-                </div>
+                </Typography>
               )}{" "}
-              <div>{moment(tour?.createdAt).fromNow()}</div>
-              <div>{tour?.description}</div>
-            </div>
-          </div>
+              <Typography>{moment(tour?.createdAt).fromNow()}</Typography>
+              <Typography>{tour?.description}</Typography>
+            </CardContent>
+          </Card>
           <RelatedTours />
           <Comment />
-        </div>
+        </BoxContainer>
       )}
     </>
   );

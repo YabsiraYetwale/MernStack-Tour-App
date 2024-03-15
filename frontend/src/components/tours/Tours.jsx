@@ -1,6 +1,8 @@
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 import Tour from "./tour/Tour";
+import { LargerBox } from "./styles";
 const Tours = () => {
   const { isLoading, tours } = useSelector((state) => state.tours);
   return (
@@ -8,21 +10,13 @@ const Tours = () => {
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: "2rem",
-          }}
-        >
+        <LargerBox>
           {tours?.map((tour, i) => (
-            <div key={i}>
+            <Box key={i}>
               <Tour tour={tour} />
-            </div>
+            </Box>
           ))}
-        </div>
+        </LargerBox>
       )}
     </>
   );

@@ -28,8 +28,8 @@ const User = mongoose.model("tourUsers", userSchema);
 export default User;
 
 const adminData = {
-  firstname: "Yabsira", 
-  lastname:"Yetwale",
+  firstname: "Yabsira",
+  lastname: "Yetwale",
   email: "yabsira.yetwale@gmail.com",
   role: "admin",
   password: bcrypt.hashSync("1234", 6),

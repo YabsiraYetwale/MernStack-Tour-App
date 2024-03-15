@@ -7,6 +7,7 @@ export const createTour = async (req, res) => {
     const tour = req.body;
     const newTour = new Tour({
       ...tour,
+      createdAt:new Date().toISOString(),
       image: req?.file?.filename,
       creator: req.userId,
     });
@@ -36,7 +37,7 @@ export const getTour = async (req, res) => {
 export const getToursByUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const tours = await Tour.find({ creator:id });
+    const tours = await Tour.find({ creator: id });
     res.json({ tours });
   } catch (error) {
     res.json({ error: error });
@@ -86,23 +87,24 @@ export const likeTour = async (req, res) => {
       return res.json({ message: "you are not authenticated!" });
     }
     const index = tour.likes.findIndex((id) => id === String(req.userId));
-    if(index === -1) {
-      tour.likes.push(req.userId)
+    if (index === -1) {
+      tour.likes.push(req.userId);
+    } else {
+      tour.likes = tour.likes.filter((id) => id !== String(req.userId));
     }
-    else{
-      tour.likes = tour.likes.filter((id) => id !== String(req.userId))
-    }
-    const updatedTour = await Tour.findByIdAndUpdate(id,tour,{new:true})
-    res.json({updatedTour})
+    const updatedTour = await Tour.findByIdAndUpdate(id, tour, { new: true });
+    res.json({ updatedTour });
   } catch (error) {
     res.json({ error: error });
   }
 };
 export const commentTour = async (req, res) => {
   try {
-    const { comment,commentator } = req.body;
-    const { commentsId} = req.params;
-    const tour = await Tour.findById(commentsId).populate('comments.commentsId')
+    const { comment, commentator,commentedAt } = req.body;
+    const { commentsId } = req.params;
+    const tour = await Tour.findById(commentsId).populate(
+      "comments.commentsId"
+    );
     const user = await User.findById(req.userId);
     if (!req.userId) {
       return res.json({ message: "you are not authenticated!" });
@@ -110,13 +112,15 @@ export const commentTour = async (req, res) => {
     const commentUser = {
       commentsId: user,
       commentator,
-      comment:String(comment)
+      commentedAt:new Date().toISOString(),
+      comment: String(comment),
     };
     tour.comments.push(commentUser);
-    const updatedTour = await Tour.findByIdAndUpdate(commentsId,tour,{new:true})
-    res.json({updatedTour})
+    const updatedTour = await Tour.findByIdAndUpdate(commentsId, tour, {
+      new: true,
+    });
+    res.json({ updatedTour });
   } catch (error) {
     res.json({ error: error });
   }
 };
-

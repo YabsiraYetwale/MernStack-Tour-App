@@ -1,8 +1,18 @@
+import { Box, CardContent, Typography } from "@mui/material";
 import { ThumbUpAlt, ThumbUpAltOutlined } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { likeTour } from "../../../redux/actions/tours";
 import { img_url } from "../../../redux/api";
+import {
+  BoxContainer,
+  CreatorTypography,
+  CustomCard,
+  CustomCardMedia,
+  LikeButton,
+  TagTypography,
+  TitleTypography,
+} from "../styles";
 const Tour = ({ tour }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,61 +25,18 @@ const Tour = ({ tour }) => {
   };
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          position: "relative",
-          width: "20rem",
-          borderRadius: "7px",
-        }}
-      >
+      <CustomCard>
         <Link to={`/tour/${tour?._id}`}>
           {" "}
-          <img
-            src={`${img_url}${tour.image}`}
-            alt="image"
-            style={{
-              width: "100%",
-              height: "250px",
-              borderTopLeftRadius: "7px",
-              borderTopRightRadius: "7px",
-            }}
-          />
+          <CustomCardMedia image={`${img_url}${tour.image}`} alt="image" />
         </Link>
-        <div style={{ padding: "20px 0px 40px 20px" }}>
-          <div
-            style={{
-              position: "absolute",
-              top: "20px",
-              left: "20px",
-              color: "#fff",
-              fontWeight: "bolder",
-              fontSize: "25px",
-            }}
-          >
+        <CardContent>
+          <CreatorTypography>
             {tour?.creatorfname} {tour?.creatorlname}
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <div style={{ display: "flex", gap: "8px", color: "#345656" }}>
-              #{tour?.tags}
-            </div>
-            <button
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-                gap: "8px",
-                color: "#0000ff",
-                backgroundColor: "transparent",
-                border: "none",
-              }}
+          </CreatorTypography>
+          <BoxContainer>
+            <TagTypography>#{tour?.tags}</TagTypography>
+            <LikeButton
               disabled={!user?.result}
               onClick={() => dispatch(likeTour(tour._id, navigate))}
             >
@@ -79,31 +46,23 @@ const Tour = ({ tour }) => {
               ) : (
                 <ThumbUpAltOutlined />
               )}
-              {tour?.likes?.length > 0 &&
-              <div>
+              {tour?.likes?.length > 0 && (
+                <Box>
                   {tour?.likes?.length}&nbsp;
-                  {tour?.likes?.length > 1 ? "Likes" : "Like"}             
-              </div>
-              }
-            </button>
-          </div>
-          <div
-            style={{
-              fontWeight: "bolder",
-              fontSize: "25px",
-              padding: "30px 0px 10px 0px",
-            }}
-          >
-            {tour.title}
-          </div>
-          <div>
+                  {tour?.likes?.length > 1 ? "Likes" : "Like"}
+                </Box>
+              )}
+            </LikeButton>
+          </BoxContainer>
+          <TitleTypography>{tour.title}</TitleTypography>
+          <Typography>
             {excerpt(tour.description)}{" "}
             <Link to={`/tour/${tour._id}`} style={{ textDecoration: "none" }}>
               Read More
             </Link>
-          </div>
-        </div>
-      </div>
+          </Typography>
+        </CardContent>
+      </CustomCard>
     </>
   );
 };

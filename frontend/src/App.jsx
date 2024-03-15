@@ -11,6 +11,8 @@ import { Box } from "@mui/material";
 import Form from "./pages/Form";
 import NoDashboard from "./components/userPost/NoDashboard";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import FormComment from "./components/comments/FormComment";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -21,7 +23,7 @@ const App = () => {
           <Route path="/tours" element={<Home />} />
           <Route path="/tours/search" element={<Home />} />
           <Route path="/tours/search/no_result" element={<Noresult />} />
-          <Route path="/auth" element={<Auth/>} />
+          <Route path="/auth" element={<Auth />} />
           <Route
             path="/dashboard"
             element={
@@ -55,6 +57,7 @@ const App = () => {
             }
           />
           <Route path="/tour/:id" element={<Detail />} />
+          <Route path="/comment/:id" element={<FormComment/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Box>
