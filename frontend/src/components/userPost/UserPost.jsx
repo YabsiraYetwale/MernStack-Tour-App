@@ -1,7 +1,6 @@
 import { Delete, Edit } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { img_url } from "../../redux/api";
 import { deleteTour } from "../../redux/actions/tours";
 import {
   CustomCardMedia,
@@ -24,7 +23,7 @@ const UserPost = ({ dashboard }) => {
   return (
     <>
       <SingleBox>
-        <CustomCardMedia image={`${img_url}${dashboard.image}`} alt="image" />
+        <CustomCardMedia image={dashboard?.image} alt="image" />
         <Box p="20px 0px 0px 20px">
           <TitleBox>{dashboard.title}</TitleBox>
           <DescriptionBox>

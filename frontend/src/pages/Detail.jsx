@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import moment from "moment";
 import { fetchTour, fetchTours } from "../redux/actions/tours";
-import { img_url } from "../redux/api";
 import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import {
   BoxContainer,
@@ -32,7 +31,7 @@ const Detail = () => {
         <BoxContainer>
           <Card>
             <Link to={`/tour/${tour?._id}`} />
-            <CustomCardMedia src={`${img_url}${tour?.image}`} alt="image" />
+            <CustomCardMedia src={tour?.image} alt="image" />
             <CardContent>
               <CustomTypography>{tour?.title}</CustomTypography>
               <Typography fontWeight="bolder">

@@ -13,7 +13,6 @@ API.interceptors.request.use((req) => {
 export const signUp = (user) => API.post("/users/signup", user);
 export const signIn = (user) => API.post("/users/signin", user);
 
-export const img_url = "https://tour-server-is2n.onrender.com/images/";
 
 export const createTour = (tour) => API.post("/tours", tour);
 export const fetchTours = () => API.get("/tours");

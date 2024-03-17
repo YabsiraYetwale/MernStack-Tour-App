@@ -3,7 +3,6 @@ import { ThumbUpAlt, ThumbUpAltOutlined } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { likeTour } from "../../../redux/actions/tours";
-import { img_url } from "../../../redux/api";
 import {
   BoxContainer,
   CreatorTypography,
@@ -28,7 +27,7 @@ const Tour = ({ tour }) => {
       <CustomCard>
         <Link to={`/tour/${tour?._id}`}>
           {" "}
-          <CustomCardMedia image={`${img_url}${tour.image}`} alt="image" />
+          <CustomCardMedia image={tour?.image} alt="image" />
         </Link>
         <CardContent>
           <CreatorTypography>

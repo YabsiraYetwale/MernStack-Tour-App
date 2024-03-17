@@ -7,7 +7,6 @@ export const createTour = async (req, res) => {
     const newTour = new Tour({
       ...tour,
       createdAt:new Date().toISOString(),
-      image: req?.file?.filename,
       creator: req.userId,
     });
     await newTour.save();
@@ -58,7 +57,7 @@ export const updateTour = async (req, res) => {
     const { id } = req.params;
     const updatedTour = await Tour.findByIdAndUpdate(
       id,
-      { ...tour, image: req?.file?.filename, creator: req.userId },
+      { ...tour,creator: req.userId },
       { new: true }
     );
     if (updatedTour) return res.json({ updatedTour });
